@@ -6,7 +6,9 @@ namespace pcl {
     enum class KeywordType {
         While,
         If,
-        Print
+        Print,
+        True,
+        False,
     };
     
     class KeywordToken : public Token {
@@ -50,6 +52,11 @@ namespace pcl {
         Subtraction,
         Multiplication,
         Division,
+        Equal,
+        Greater,
+        GreaterOrEqual,
+        Less,
+        LessOrEqual,
     };
 
     class BinaryOperatorToken : public Token {

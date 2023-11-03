@@ -20,12 +20,17 @@ file(GLOB TEST_SOURCES Test/*.cpp)
 enable_testing()
 
 foreach(TEST ${TEST_SOURCES})
-  cmake_path(GET TEST FILENAME TEST_FILE_NAME)
-  # cmake_path(REMOVE_EXTENSION TEST_FILE_NAME OUTPUT_VARIABLE TEST_FILE_NAME_NO_EXTENSION)
-  cmake_path(REMOVE_EXTENSION TEST_FILE_NAME)
-  add_executable(${TEST_FILE_NAME} ${TEST})
-  target_include_directories(${TEST_FILE_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Source)
-  target_link_libraries(${TEST_FILE_NAME} pcllib)
-  set_property(TARGET ${TEST_FILE_NAME} PROPERTY CXX_STANDARD 20)
-  add_test(NAME ${TEST_FILE_NAME} COMMAND ${TEST_FILE_NAME})
+    cmake_path(GET TEST FILENAME TEST_FILE_NAME)
+    cmake_path(REMOVE_EXTENSION TEST_FILE_NAME)
+    add_executable(${TEST_FILE_NAME} ${TEST})
+    target_include_directories(${TEST_FILE_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Source)
+    target_link_libraries(${TEST_FILE_NAME} pcllib)
+    set_property(TARGET ${TEST_FILE_NAME} PROPERTY CXX_STANDARD 20)
+    add_test(NAME ${TEST_FILE_NAME} COMMAND ${TEST_FILE_NAME})
 endforeach()
+
+add_custom_target(run
+    COMMAND pcl
+    DEPENDS pcl
+    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
+)
