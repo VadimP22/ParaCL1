@@ -6,6 +6,7 @@ namespace pcl {
     using TokenKind = int;
 
     class Token {
+        //TODO: Add location in source file
         public:
         static const TokenKind Kind = -1;
         

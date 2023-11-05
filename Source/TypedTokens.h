@@ -53,6 +53,7 @@ namespace pcl {
         Multiplication,
         Division,
         Equal,
+        NotEqual,
         Greater,
         GreaterOrEqual,
         Less,
@@ -90,5 +91,11 @@ namespace pcl {
         private:
         unsigned absolute_value_;
         bool is_negative_;
+    };
+
+    class DelemiterToken : public Token {
+        public:
+        static const TokenKind Kind = 7;  
+        DelemiterToken() : Token(Kind) {}
     };
 }; // namespace pcl

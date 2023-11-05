@@ -6,10 +6,10 @@
 int main() {
     using namespace boost::ut;
 
-    pcl::StaticSourceBuffer buffer{"if sequence1~ while two true theree four~ ~five false  print six seven"};
+    pcl::StaticSourceBuffer buffer{"while;;while if; while ;while true false"};
     pcl::Lexer lexer{buffer};
 
     auto tokens = lexer.Lex();
-    
-    expect(tokens->GetTokensCount() == 5_i);
+
+    expect(tokens->GetTokensCount() == 11_i);
 }
