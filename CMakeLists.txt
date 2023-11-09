@@ -34,3 +34,8 @@ add_custom_target(run
     DEPENDS pcl
     WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
 )
+
+# "Config" :)
+target_compile_definitions(pcl PUBLIC DEBUG_MODE)
+target_compile_definitions(pcllib PUBLIC DEBUG_MODE)
+

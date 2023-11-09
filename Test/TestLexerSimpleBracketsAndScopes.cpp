@@ -6,7 +6,7 @@
 int main() {
     using namespace boost::ut;
 
-    pcl::StaticSourceBuffer buffer{"(() ) {  )}"};
+    pcl::StaticSourceBuffer buffer{"(()  ) {  )}"};
     pcl::Lexer lexer{buffer};
 
     auto tokens = lexer.Lex();

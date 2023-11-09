@@ -3,12 +3,12 @@
 #include <utility>
 
 #include "ISourceBuffer.h"
-#include "LexerHandlers.h"
+#include "LexerCheckers.h"
 #include "TokenizedBuffer.h"
 #include "LexerUtils.h"
 #include "TypedTokens.h"
 
-void HandleSingleSymbol(pcl::TokenizedBuffer *buffer, const char* it) {
+void HandleSingleSymbol(pcl::TokenizedBuffer *buffer, const char *it) {
     if (*it == ';')
         buffer->Push(new pcl::DelemiterToken);
     if (*it == '(')
@@ -21,13 +21,14 @@ void HandleSingleSymbol(pcl::TokenizedBuffer *buffer, const char* it) {
         buffer->Push(new pcl::ScopeCloseToken);
 }
 
-void HandleSequence(pcl::TokenizedBuffer* buffer, const char* begin, const char* end) {
-    auto keyword = pcl::HandleKeyword(begin, end);
+void HandleSequence(pcl::TokenizedBuffer* buffer, const char *begin, const char *end) {
+    auto keyword = pcl::CheckKeyword(begin, end);
     if (keyword.first) {
         buffer->Push(new pcl::KeywordToken(keyword.second));
         return;
     }
 
+    buffer->Push(new pcl::IdentifierToken(begin, end));
 }
 
 pcl::TokenizedBuffer* pcl::Lexer::Lex() {
@@ -56,7 +57,8 @@ pcl::TokenizedBuffer* pcl::Lexer::Lex() {
         }
 
     }
-    HandleSequence(buffer, sequence_begin + 1, source_buffer_.End());
+    if (sequence_length > 0)
+        HandleSequence(buffer, sequence_begin + 1, source_buffer_.End());
 
     return buffer;
 }

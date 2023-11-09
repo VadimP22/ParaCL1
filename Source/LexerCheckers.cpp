@@ -1,9 +1,9 @@
-#include "LexerHandlers.h"
+#include "LexerCheckers.h"
 
 #include "LexerUtils.h"
 #include "TypedTokens.h"
 
-std::pair<bool, pcl::KeywordType> pcl::HandleKeyword(
+std::pair<bool, pcl::KeywordType> pcl::CheckKeyword(
         const char* begin,
         const char* end) {
     bool is_while = pcl::CompareToString(begin, end, "while");

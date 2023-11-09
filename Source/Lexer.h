@@ -5,12 +5,12 @@
 
 namespace pcl {
     class Lexer {
-        public:
+    public:
         Lexer(ISourceBuffer &source_buffer) : source_buffer_(source_buffer) {};
 
         TokenizedBuffer* Lex();
 
-        private:
+    private:
         ISourceBuffer &source_buffer_;
     };
 };

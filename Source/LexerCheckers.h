@@ -5,5 +5,5 @@
 #include "TypedTokens.h"
 
 namespace pcl {
-    std::pair<bool, pcl::KeywordType> HandleKeyword(const char*, const char*);
+    std::pair<bool, pcl::KeywordType> CheckKeyword(const char*, const char*);
 };
