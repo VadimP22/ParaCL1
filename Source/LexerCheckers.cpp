@@ -29,3 +29,19 @@ std::pair<bool, pcl::KeywordType> pcl::CheckKeyword(
 
     return std::pair(false, pcl::KeywordType::If);
 }
+
+
+std::pair<bool, pcl::BinaryOperatorType> pcl::CheckBinaryOperation(const char *it) {
+    // TODO
+
+    if (*it == '=')
+        return std::pair(true, pcl::BinaryOperatorType::Assignment);
+
+    if (*it == '+')
+        return std::pair(true, pcl::BinaryOperatorType::Addition);
+
+    if (*it == '-')
+        return std::pair(true, pcl::BinaryOperatorType::Subtraction);
+
+    return std::pair(false, pcl::BinaryOperatorType::Assignment);
+}

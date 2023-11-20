@@ -5,7 +5,7 @@
 #include "ISourceBuffer.h"
 
 namespace pcl {
-    class StaticSourceBuffer : public ISourceBuffer {
+    class StaticSourceBuffer final : public ISourceBuffer {
     public:
         StaticSourceBuffer(const char* data) : data_(data) {}
         

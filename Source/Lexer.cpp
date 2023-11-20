@@ -19,6 +19,12 @@ void HandleSingleSymbol(pcl::TokenizedBuffer *buffer, const char *it) {
         buffer->Push(new pcl::ScopeOpenToken);
     if (*it == '}')
         buffer->Push(new pcl::ScopeCloseToken);
+
+    auto binary_operation = pcl::CheckBinaryOperation(it);
+    if (binary_operation.first) {
+        buffer->Push(new pcl::BinaryOperatorToken(binary_operation.second));
+        return;
+    }
 }
 
 void HandleSequence(pcl::TokenizedBuffer* buffer, const char *begin, const char *end) {
@@ -27,7 +33,7 @@ void HandleSequence(pcl::TokenizedBuffer* buffer, const char *begin, const char 
         buffer->Push(new pcl::KeywordToken(keyword.second));
         return;
     }
-
+  
     buffer->Push(new pcl::IdentifierToken(begin, end));
 }
 
@@ -44,19 +50,17 @@ pcl::TokenizedBuffer* pcl::Lexer::Lex() {
             sequence_length += 1;
             sequence_end = it;
         } else {
-            if (sequence_length > 0) {
+            if (sequence_length > 0) 
                 HandleSequence(buffer, sequence_begin + 1, sequence_end + 1);
-            }
 
+            HandleSingleSymbol(buffer, it);
+            
             sequence_begin = it;
             sequence_end = it;
             sequence_length = 0;
-
-            HandleSingleSymbol(buffer, it);
-           
         }
-
     }
+
     if (sequence_length > 0)
         HandleSequence(buffer, sequence_begin + 1, source_buffer_.End());
 

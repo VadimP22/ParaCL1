@@ -15,7 +15,7 @@ namespace pcl {
         False,
     };
     
-    class KeywordToken : public Token {
+    class KeywordToken final : public Token {
     public:
         static const TokenKind Kind = 0;      
         KeywordToken(KeywordType type) : Token(Kind), type_(type) {}
@@ -26,7 +26,7 @@ namespace pcl {
         KeywordType type_;
     };
 
-    class ScopeOpenToken : public Token {
+    class ScopeOpenToken final : public Token {
     public:
         static const TokenKind Kind = 1;
         ScopeOpenToken() : Token(Kind) {}
@@ -36,7 +36,7 @@ namespace pcl {
     #endif
     };
 
-    class ScopeCloseToken : public Token {
+    class ScopeCloseToken final : public Token {
     public:
         static const TokenKind Kind = 2;
         ScopeCloseToken() : Token(Kind) {}
@@ -46,7 +46,7 @@ namespace pcl {
     #endif
     };
 
-    class BracketOpenToken : public Token {
+    class BracketOpenToken final : public Token {
     public:
         static const TokenKind Kind = 3;
         BracketOpenToken() : Token(Kind) {}
@@ -56,7 +56,7 @@ namespace pcl {
     #endif
     };
 
-    class BracketCloseToken : public Token {
+    class BracketCloseToken final : public Token {
     public:
         static const TokenKind Kind = 4;
         BracketCloseToken() : Token(Kind) {}
@@ -86,7 +86,7 @@ namespace pcl {
     void Dump(BinaryOperatorType type, std::ostream &out);
 #endif
 
-    class BinaryOperatorToken : public Token {
+    class BinaryOperatorToken final : public Token {
     public:
         static const TokenKind Kind = 5;
         BinaryOperatorToken(BinaryOperatorType type) : Token(Kind), type_(type) {}
@@ -104,7 +104,7 @@ namespace pcl {
         BinaryOperatorType type_;
     };
 
-    class IntegerLiteral : public Token {
+    class IntegerLiteral final : public Token {
     public:
         static const TokenKind Kind = 6;
         IntegerLiteral(char *begin, char *end) : Token(Kind) {}
@@ -126,13 +126,13 @@ namespace pcl {
         bool is_negative_;
     };
 
-    class DelemiterToken : public Token {
+    class DelemiterToken final : public Token {
     public:
         static const TokenKind Kind = 7;  
         DelemiterToken() : Token(Kind) {}
     };
 
-    class IdentifierToken : public Token {
+    class IdentifierToken final : public Token {
     public:
         static const TokenKind Kind = 8;
         IdentifierToken(const char *begin, const char *end) : Token(Kind), begin_(begin), end_(end) {}

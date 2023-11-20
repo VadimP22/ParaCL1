@@ -4,7 +4,7 @@
 #include "TokenizedBuffer.h"
 
 namespace pcl {
-    class Lexer {
+    class Lexer final {
     public:
         Lexer(ISourceBuffer &source_buffer) : source_buffer_(source_buffer) {};
 

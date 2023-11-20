@@ -6,8 +6,13 @@
 #include "Token.h"
 
 namespace pcl {
-    class TokenizedBuffer {
+    class TokenizedBuffer final {
     public:
+        ~TokenizedBuffer() {
+            for (auto token : tokens_)
+                delete(token);
+        }
+        
         Token** Begin() { return tokens_.begin().base(); };
         Token** End() { return tokens_.end().base(); };
 
