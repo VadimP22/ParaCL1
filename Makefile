@@ -16,15 +16,13 @@ CXXFLAGS += -MMD
 CXXFLAGS += -MP
 DEPS := $(OBJ:%.o=%.d)
 
-.PHONY: clean build-exe build-tests test
+.PHONY: clean test run
 
-build-exe: $(BUILDDIR)/$(EXE)
+build: $(OBJ) $(BUILDDIR)/main.o
 
 run: Run$(EXE)
 
 test: $(TEST_RUN)
-
-build-tests: $(TEST_EXE)
 
 $(BUILDDIR)/$(EXE): $(BUILDDIR)/main.o $(OBJ)
 	$(CXX) $(LDFLAGS) $(BUILDDIR)/main.o $(OBJ) -o $@
