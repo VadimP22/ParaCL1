@@ -10,8 +10,8 @@ TEST_RUN := $(TEST_EXE:$(BUILDDIR)/%=Run%)
 OBJ := $(SRC:Source/%.cpp=$(BUILDDIR)/%.o)
 EXE := main
 
-CXXFLAGS += -I Source
 CXXFLAGS += -std=c++20
+CXXFLAGS += -I Source
 CXXFLAGS += -MMD
 CXXFLAGS += -MP
 DEPS := $(OBJ:%.o=%.d)
@@ -43,5 +43,10 @@ Run%: $(BUILDDIR)/%
 
 clean:
 	rm -rf $(BUILDDIR)
+	rm -f compile_commands.json
+
+# WARN: Do not use -jN option on this target!
+compile_commands.json:
+	@make CXX="bear --append -- $(CXX)"
 
 -include $(DEPS)
